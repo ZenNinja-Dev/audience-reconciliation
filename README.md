@@ -2,6 +2,15 @@
 
 A portfolio demonstration by **Jakub Lazový** · [github.com/ZenNinja-Dev](https://github.com/ZenNinja-Dev)
 
+[![Live showcase](https://img.shields.io/badge/Live_showcase-open-2ea44f?style=for-the-badge)](https://zenninja-dev.github.io/audience-reconciliation/)
+&nbsp;
+![Python 3.9+](https://img.shields.io/badge/python-3.9%2B-3776ab)
+![Dependencies: stdlib only](https://img.shields.io/badge/dependencies-stdlib_only-lightgrey)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
+
+> **🔗 Live one-page showcase → https://zenninja-dev.github.io/audience-reconciliation/**
+> The problem, the core design decision, and the results in a couple of minutes — no setup, nothing to run.
+
 A small, runnable system that reconciles a **CRM-quoted number against a live
 data-warehouse number** and tells a salesperson whether it's safe to put on a
 contract — before a wrong number causes a pricing error.
@@ -18,6 +27,14 @@ feeds pricing" problem.
 The design decision that runs through the whole project: **counting is a rules problem
 before it's ever an AI problem.** A deterministic, tested engine produces the number;
 an optional, bounded LLM only phrases the result and never touches a figure.
+
+---
+
+## Architecture
+
+![Architecture — a rep triggers validation; a deterministic engine produces the number and the verdict; a bounded LLM only phrases the result; only high-confidence safe cases auto-return, everything else routes to a human.](docs/part2_architecture.png)
+
+The money-bearing path — data → engine → verdict — never passes through the model.
 
 ---
 
@@ -59,6 +76,7 @@ The `docs/` folder walks through the thinking, not just the code:
 
 | Document | What's in it |
 |---|---|
+| [🔗 **Live showcase**](https://zenninja-dev.github.io/audience-reconciliation/) | The hosted, non-technical one-pager — the same story, nothing to run |
 | [`docs/part1_scope.md`](docs/part1_scope.md) | Clarifying questions, assumptions, success metrics, out-of-scope |
 | [`docs/part2_design.md`](docs/part2_design.md) | The agent-vs-deterministic split, human-in-the-loop, model selection, integration surface, governance |
 | [`docs/part2_architecture.mmd`](docs/part2_architecture.mmd) / [`.png`](docs/part2_architecture.png) | Architecture diagram |

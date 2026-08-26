@@ -20,7 +20,7 @@ json:
 	python3 -m src.run --json
 
 demo: eval
-	@echo "\n--- Implausible spike (Initech, CK-1007) ---"
-	@python3 -m src.run --account CK-1007
-	@echo "\n--- Multi-business-unit sum (Northwind, CK-1004) ---"
-	@python3 -m src.run --account CK-1004
+	@echo "\n--- Implausible spike, number withheld (Torch Digital, ACC-2007) ---"
+	@python3 -m src.run --account ACC-2007
+	@echo "\n--- Multi-business-unit account, must sum (Solaris, ACC-2004) ---"
+	@python3 -m src.run --account ACC-2004
