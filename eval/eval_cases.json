@@ -1,0 +1,122 @@
+[
+  {
+    "sfdc_account_id": "001Md00000A1a01IAA",
+    "customer_key": "ACC-2001",
+    "account_name": "Larkspur Retail Co",
+    "category": "clean_drift",
+    "why_expected": "Quote built 2026-04-05 predates the current warehouse number; expect a small upward drift and a REFRESH recommendation, safe to auto-use.",
+    "expected_status": "REFRESH",
+    "expected_confidence": "HIGH",
+    "expected_safe": true
+  },
+  {
+    "sfdc_account_id": "001Md00000A1a02IAA",
+    "customer_key": "ACC-2002",
+    "account_name": "Vantage Apparel Group",
+    "category": "clean_match",
+    "why_expected": "Quoted count already equals the current count. The easy case; must come back MATCH and safe.",
+    "expected_status": "MATCH",
+    "expected_confidence": "HIGH",
+    "expected_safe": true
+  },
+  {
+    "sfdc_account_id": "001Md00000A1a03IAA",
+    "customer_key": "ACC-2003",
+    "account_name": "Cobalt Financial",
+    "category": "clean_drift",
+    "why_expected": "Quote is a few percent below the live number; expect REFRESH, safe to auto-use.",
+    "expected_status": "REFRESH",
+    "expected_confidence": "HIGH",
+    "expected_safe": true
+  },
+  {
+    "sfdc_account_id": "001Md00000A1a04IAA",
+    "customer_key": "ACC-2004",
+    "account_name": "Solaris Global Holdings",
+    "category": "multi_bu_aggregation",
+    "why_expected": "Quoted as a single combined figure (480,000) but the warehouse holds THREE business-unit rows (NA 312,400 + EMEA 141,900 + APAC 88,300 = 542,600). The engine must SUM, not pick one or average. Expect REFRESH to 542,600.",
+    "expected_status": "REFRESH",
+    "expected_confidence": "HIGH",
+    "expected_safe": true
+  },
+  {
+    "sfdc_account_id": "001Md00000A1a05IAA",
+    "customer_key": "ACC-2005",
+    "account_name": "Everpeak Brands",
+    "category": "missing_dbx_match",
+    "why_expected": "New logo; notes say confirm the warehouse sync completed. No warehouse row exists. Must NOT invent a number — expect HOLD_NO_MATCH.",
+    "expected_status": "HOLD_NO_MATCH",
+    "expected_confidence": "NONE",
+    "expected_safe": false
+  },
+  {
+    "sfdc_account_id": "001Md00000A1a06IAA",
+    "customer_key": "ACC-2006",
+    "account_name": "Halcyon Media Group",
+    "category": "stale_data",
+    "why_expected": "Warehouse record last refreshed 2026-05-08, i.e. 54 days before the as-of date — well past the 14-day freshness threshold. Expect REVIEW_STALE, not safe.",
+    "expected_status": "REVIEW_STALE",
+    "expected_confidence": "LOW",
+    "expected_safe": false
+  },
+  {
+    "sfdc_account_id": "001Md00000A1a07IAA",
+    "customer_key": "ACC-2007",
+    "account_name": "Torch Digital",
+    "category": "implausible_trend",
+    "why_expected": "History is 9,100 -> 9,600 -> 486,200: a ~50x week-over-week jump that is almost certainly a data error. The engine must FLAG it and refuse to hand back the current value. Expect REVIEW_IMPLAUSIBLE. (This is the found-and-fixed case — see eval_cases.md.)",
+    "expected_status": "REVIEW_IMPLAUSIBLE",
+    "expected_confidence": "LOW",
+    "expected_safe": false
+  },
+  {
+    "sfdc_account_id": "001Md00000A1a08IAA",
+    "customer_key": "ACC-2008",
+    "account_name": "Juniper CPG",
+    "category": "key_mismatch_alias",
+    "why_expected": "Salesforce key is ACC-2008 but the warehouse holds ACC-2008-OLD after a Q1 rebrand. The engine must resolve the alias, then treat it as a normal drift — but at MEDIUM confidence because the mapping was inferred, so NOT auto-safe.",
+    "expected_status": "REFRESH",
+    "expected_confidence": "MEDIUM",
+    "expected_safe": false
+  },
+  {
+    "sfdc_account_id": "001Md00000A1a09IAA",
+    "customer_key": "ACC-2009",
+    "account_name": "Sable Industries",
+    "category": "shared_key_ambiguous",
+    "why_expected": "Sable Industries and Sable Analytics both carry customer_key ACC-2009, which maps to ONE 'Combined Legacy' warehouse row (171,000). The count cannot be attributed to either account alone. Expect ESCALATE_AMBIGUOUS.",
+    "expected_status": "ESCALATE_AMBIGUOUS",
+    "expected_confidence": "NONE",
+    "expected_safe": false
+  },
+  {
+    "sfdc_account_id": "001Md00000A1a10IAA",
+    "customer_key": "ACC-2009",
+    "account_name": "Sable Analytics",
+    "category": "shared_key_ambiguous",
+    "why_expected": "The other half of the shared-key pair. Same verdict: ESCALATE_AMBIGUOUS.",
+    "expected_status": "ESCALATE_AMBIGUOUS",
+    "expected_confidence": "NONE",
+    "expected_safe": false
+  },
+  {
+    "sfdc_account_id": "001Md00000A1a11IAA",
+    "customer_key": "ACC-2010",
+    "account_name": "Ridgeline Solutions",
+    "category": "clean_match",
+    "why_expected": "Quote equals the live count. The pending tier upgrade in the notes is a pricing concern, not an audience-count concern, and must not affect this verdict. Expect MATCH.",
+    "expected_status": "MATCH",
+    "expected_confidence": "HIGH",
+    "expected_safe": true
+  },
+  {
+    "sfdc_account_id": "001Md00000A1a12IAA",
+    "customer_key": "ACC-2011",
+    "account_name": "Aperture Consumer Tech",
+    "category": "clean_drift",
+    "why_expected": "Large account, quote a few percent below live. Expect REFRESH to 1,142,800, safe to auto-use.",
+    "expected_status": "REFRESH",
+    "expected_confidence": "HIGH",
+    "expected_safe": true
+  }
+]

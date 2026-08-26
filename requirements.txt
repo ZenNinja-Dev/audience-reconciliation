@@ -1,0 +1,6 @@
+# The prototype runs on the Python 3.9+ standard library only — nothing to install.
+#
+# Optional, only if you wire a real hosted LLM into the narration layer
+# (RECON_LLM_PROVIDER=anthropic). The local Ollama path uses urllib, no package.
+#
+# anthropic>=0.39.0

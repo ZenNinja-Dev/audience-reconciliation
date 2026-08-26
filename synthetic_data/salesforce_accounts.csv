@@ -1,0 +1,13 @@
+sfdc_account_id,account_name,customer_key,region,pricing_tier,last_quoted_audience_count,last_quote_date,renewal_date,account_notes
+001Md00000A1a01IAA,Larkspur Retail Co,ACC-2001,NA,Tier 2,128400,2026-04-05,2026-08-18,
+001Md00000A1a02IAA,Vantage Apparel Group,ACC-2002,NA,Tier 2,91220,2026-05-12,2026-09-03,
+001Md00000A1a03IAA,Cobalt Financial,ACC-2003,EMEA,Tier 1,198000,2026-04-22,2026-08-28,
+001Md00000A1a04IAA,Solaris Global Holdings,ACC-2004,Global,Tier 1,480000,2026-03-18,2026-07-22,Multi-region account; audience historically quoted as a single combined figure across business units.
+001Md00000A1a05IAA,Everpeak Brands,ACC-2005,NA,Tier 3,64000,2026-02-27,2026-07-08,New logo onboarded last quarter; confirm data-warehouse sync completed.
+001Md00000A1a06IAA,Halcyon Media Group,ACC-2006,EMEA,Tier 2,57300,2026-01-20,2026-08-04,
+001Md00000A1a07IAA,Torch Digital,ACC-2007,NA,Tier 2,9400,2026-01-07,2026-07-27,
+001Md00000A1a08IAA,Juniper CPG,ACC-2008,APAC,Tier 1,112000,2026-04-14,2026-08-12,Formerly named Juniper Household Goods; renamed after Q1 rebrand.
+001Md00000A1a09IAA,Sable Industries,ACC-2009,NA,Tier 1,88000,2026-03-04,2026-07-31,Spun off from Sable Group last year; shares legacy data-warehouse customer key with Sable Analytics pending data-team split.
+001Md00000A1a10IAA,Sable Analytics,ACC-2009,NA,Tier 2,82000,2026-03-04,2026-07-31,Spun off from Sable Group last year; shares legacy data-warehouse customer key with Sable Industries pending data-team split.
+001Md00000A1a11IAA,Ridgeline Solutions,ACC-2010,NA,Tier 3,47900,2026-05-24,2026-09-12,Tier upgrade pending approval, not yet reflected in the pricing system.
+001Md00000A1a12IAA,Aperture Consumer Tech,ACC-2011,APAC,Tier 1,1080000,2026-04-30,2026-08-24,

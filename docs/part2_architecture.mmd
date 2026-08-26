@@ -1,0 +1,44 @@
+flowchart TD
+    Rep([Rep: validate this account before I quote]) --> API[Validation service]
+
+    subgraph Sources [Integration surface -- swappable data readers]
+        SF[(Salesforce<br/>account + quoted count)]
+        GENIE[(Databricks / Genie<br/>current + history)]
+    end
+
+    API --> SF
+    API --> GENIE
+    SF --> M
+    GENIE --> M
+
+    subgraph Engine [Deterministic reconciliation engine -- NO AI]
+        direction TB
+        M[1. Resolve key<br/>direct / alias / heuristic] --> AMB{shared key?}
+        AMB -- yes --> ESC[ESCALATE_AMBIGUOUS]
+        AMB -- no --> AGG[2. Sum business units]
+        M -. no match .-> HOLD[HOLD_NO_MATCH]
+        AGG --> FRESH{fresh?}
+        FRESH -- no --> STALE[REVIEW_STALE]
+        FRESH -- yes --> PLAUS{plausible<br/>week-over-week?}
+        PLAUS -- no --> IMPL[REVIEW_IMPLAUSIBLE]
+        PLAUS -- yes --> DRIFT{quote vs<br/>reconciled}
+        DRIFT -- within tol --> MATCH[MATCH]
+        DRIFT -- differs --> REFRESH[REFRESH]
+    end
+
+    ESC --> VERDICT
+    HOLD --> VERDICT
+    STALE --> VERDICT
+    IMPL --> VERDICT
+    MATCH --> VERDICT
+    REFRESH --> VERDICT
+
+    VERDICT[/Verdict:<br/>number + status + confidence + reason codes/]
+
+    VERDICT --> LLM{{Bounded LLM<br/>rephrase only -- never recomputes}}
+    LLM --> OUT
+
+    VERDICT --> GATE{status + confidence}
+    GATE -- MATCH/REFRESH HIGH --> OUT([Rep: number ready to use])
+    GATE -- MEDIUM / REVIEW --> HUMAN([Human check before quoting])
+    GATE -- HOLD / ESCALATE --> DATA([Data team: fix mapping / sync])
